@@ -1,0 +1,12 @@
+<div class="period-buttons">
+  <button nz-button (click)="changePeriod('day')">День</button>
+  <button nz-button (click)="changePeriod('week')">Неделя</button>
+  <button nz-button (click)="changePeriod('month')">Месяц</button>
+</div>
+
+<div style="max-width: 600px; height: 320px; margin: 24px auto">
+  <p-chart *ngIf="tempChartData" type="line" [data]="tempChartData"></p-chart>
+</div>
+<div style="max-width: 600px; height: 320px; margin: 24px auto">
+  <p-chart *ngIf="humidityChartData" type="bar" [data]="humidityChartData"></p-chart>
+</div>

@@ -1,0 +1,14 @@
+.period-buttons button {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+
+  &:hover {
+    background: var(--primary);
+    color: white;
+  }
+}
+
+p-chart {
+  // PrimeNG автоматически подхватит CSS переменные
+}

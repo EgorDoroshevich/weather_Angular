@@ -1,0 +1,25 @@
+<div class="aside">
+  <div class="aside__container">
+    <div class="input__container">
+      <div class="input__container__item">
+        <input type="text" class="input" placeholder="введите текст" [(ngModel)]="inputText" />
+      </div>
+      <div class="input__container__btn">
+        <button class="write__btn" (click)="addNote()">Добавить запись</button>
+      </div>
+    </div>
+
+    <div class="notes__container">
+      <div class="note" *ngFor="let note of notes; trackBy: trackById">
+        <div>
+          <p class="text__item">{{ note.text }}</p>
+          <p class="date__item">
+            {{ note.date | date : 'dd.MM.yy, HH:mm:ss' }}
+          </p>
+        </div>
+        <button class="delete__item" (click)="removeNote(note.id)">delete</button>
+      </div>
+    </div>
+    <div class="time__container"></div>
+  </div>
+</div>
