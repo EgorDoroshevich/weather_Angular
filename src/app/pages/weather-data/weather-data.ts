@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { forkJoin } from 'rxjs';
 import { WeatherService } from '../../data/services/weather';
@@ -14,7 +14,7 @@ import { WeatherMinsk } from '../weather-minsk/weather-minsk';
   templateUrl: './weather-data.html',
   styleUrl: './weather-data.scss',
 })
-export class WeatherDataComponent implements OnInit {
+export class WeatherDataComponent implements OnInit, OnDestroy {
   data: WeatherData[] = [
     { country: 'Беларусь', city: 'Минск', lat: 53.9, lon: 27.56 },
     { country: 'Россия', city: 'Москва', lat: 55.75, lon: 37.61 },
@@ -29,10 +29,19 @@ export class WeatherDataComponent implements OnInit {
   loading = false;
   windChartData: any | null[] = null;
 
+  private intervalId: any;
+
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit() {
     this.loadTemperatures();
+    this.startAutoUpdate();
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
   loadTemperatures() {
@@ -59,6 +68,13 @@ export class WeatherDataComponent implements OnInit {
     });
   }
 
+  private startAutoUpdate() {
+    this.intervalId = setInterval(() => {
+      console.log('🔄 Автообновление погоды...');
+      this.loadTemperatures();
+    }, 15 * 60 * 1000); 
+  }
+
   private buildWindPie() {
     this.windChartData = {
       labels: this.data.map((d) => d.country),
@@ -66,15 +82,17 @@ export class WeatherDataComponent implements OnInit {
         {
           data: this.data.map((d) => d.windSpeed),
           backgroundColor: [
-            '#1890ff',
-            '#13c2c2',
-            '#52c41a',
-            '#faad14',
-            '#eb2f96',
-            '#722ed1',
-            '#fa541c',
-            '#597ef7',
+            '#DC143C',
+            '#4169E1',
+            '#ffd700',
+            '#F59E0B',
+            '#10B981',
+            '#EF4444',
+            '#F97316',
+            '#8B5CF6',
           ],
+          borderColor: '#ffffff',
+          borderWidth: 0.1,
         },
       ],
     };

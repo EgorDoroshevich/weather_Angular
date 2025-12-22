@@ -19,7 +19,7 @@ export class WeatherMinskService {
       end_date: end,
       timezone: 'auto',
     };
-    return this.http.get('https://api.open-meteo.com/v1/forecast', { params });
+    return this.http.get(this.baseUrl, { params });
   }
   getHumidityRange(start: string, end: string): Observable<any> {
     const params = {

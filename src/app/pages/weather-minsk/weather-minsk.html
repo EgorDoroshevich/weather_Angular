@@ -1,12 +1,16 @@
-<div class="period-buttons">
-  <button nz-button (click)="changePeriod('day')">День</button>
-  <button nz-button (click)="changePeriod('week')">Неделя</button>
-  <button nz-button (click)="changePeriod('month')">Месяц</button>
-</div>
-
-<div style="max-width: 600px; height: 320px; margin: 24px auto">
-  <p-chart *ngIf="tempChartData" type="line" [data]="tempChartData"></p-chart>
-</div>
-<div style="max-width: 600px; height: 320px; margin: 24px auto">
-  <p-chart *ngIf="humidityChartData" type="bar" [data]="humidityChartData"></p-chart>
+<div class="grafic">
+  <div class="tempChartData">
+    <div class="period-buttons">
+      <button nz-button class="changePeriodbtn" (click)="changePeriod('day')">День</button>
+      <button nz-button class="changePeriodbtn" (click)="changePeriod('week')">Неделя</button>
+      <button nz-button class="changePeriodbtn" (click)="changePeriod('month')">Месяц</button>
+    </div>
+    <div class="chart">
+      <p-chart *ngIf="tempChartData" type="line" [data]="tempChartData"></p-chart>
+    </div>
+  </div>
+  <div class="humidityChartData">
+    <h3 class="humidityH3">Диограмма влажности за неделю по городу Минску</h3>
+    <p-chart *ngIf="humidityChartData" type="bar" [data]="humidityChartData"></p-chart>
+  </div>
 </div>

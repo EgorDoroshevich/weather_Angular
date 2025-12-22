@@ -1,28 +1,30 @@
 <div class="conrainer">
-  <nz-table #basicTable [nzData]="data" [nzBordered]="true" [nzLoading]="loading">
-    <thead>
-      <tr>
-        <th>Страна</th>
-        <th>Город</th>
-        <th>Температура, °C</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let row of basicTable.data">
-        <td>{{ row.country }}</td>
-        <td>{{ row.city }}</td>
-        <td>{{ row.temperature }}</td>
-      </tr>
-    </tbody>
-  </nz-table>
+  <div class="table">
+    <nz-table #basicTable [nzData]="data" [nzBordered]="true" [nzLoading]="loading">
+      <thead class="table__item">
+        <tr class="table__item__elem">
+          <th class="item__part">Страна</th>
+          <th class="item__part">Город</th>
+          <th class="item__part">Температура, °C</th>
+        </tr>
+      </thead>
+      <tbody class="table__item">
+        <tr class="table__item__elem" *ngFor="let row of basicTable.data">
+          <td class="item__part">{{ row.country }}</td>
+          <td class="item__part">{{ row.city }}</td>
+          <td class="item__part">{{ row.temperature }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
   <div class="statistics">
     <div class="diagrams">
-      <h3>Круговая диаграмма скорости ветра стран СНГ</h3>
+      <h3 class="diagrams__item__h3">Круговая диаграмма скорости ветра стран СНГ</h3>
       <p-chart class="diagrams__item" *ngIf="windChartData" type="pie" [data]="windChartData">
       </p-chart>
     </div>
     <div class="grafic">
-      <h3></h3>
       <app-weather-minsk></app-weather-minsk>
     </div>
   </div>

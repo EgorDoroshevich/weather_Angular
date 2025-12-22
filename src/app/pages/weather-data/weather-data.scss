@@ -1,34 +1,87 @@
 .conrainer {
-  width: 1000px;
-  // height: 100%;
   display: flex;
-  .diagrams {
-    .diagrams__item {
-      width: 100%;
-      height: 100%;
-    }
-    // .p-chart {
-    //   width: 100% !important;
-    //   height: 320px !important;
-    //   border-radius: 20px !important;
-    //   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    // }
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+
+  // 🏷️ КАРТОЧКИ (единый стиль)
+  .table,
+  .statistics {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 32px;
+    margin: 24px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
   }
-}
-.statistics {
-  display: flex;
-  margin: 0 20px;
-  .diagrams {
-    max-width: 500px;
-    height: 300px;
-    margin: 24px auto;
-    padding: 10px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
+
+  .table {
+    flex: 1;
   }
-  .grafic {
+
+  .statistics {
     display: flex;
-    margin: 20px;
+    flex-direction: row;
+    gap: 24px;
+    margin: 20px 24px;
+
+    @media (max-width: 1024px) {
+      flex-direction: column;
+    }
+
+    @media (max-width: 768px) {
+      margin: 16px;
+      gap: 16px;
+    }
+  }
+
+  // 📊 ДИАГРАММЫ
+  .diagrams {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 16px;
+    padding: 24px;
+    background: rgba(79, 70, 229, 0.08);
+    max-width: 500px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    &__item__h3 {
+      color: var(--text-secondary);
+      margin: 0 0 16px 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    &__item {
+      width: 100%;
+      height: 400px;
+
+      @media (max-width: 768px) {
+        height: 300px;
+      }
+    }
+  }
+
+  // 📈 ГРАФИКИ
+  .grafic {
+    flex: 1;
+    display: flex;
+    padding: 24px;
+    background: rgba(79, 70, 229, 0.08);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+
+    app-weather-minsk {
+      width: 100%;
+      height: 850px;
+    }
+
+    @media (max-width: 768px) {
+      height: 350px;
+    }
   }
 }

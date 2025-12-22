@@ -1,14 +1,57 @@
-.period-buttons button {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
+.period-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 5px;
 
-  &:hover {
-    background: var(--primary);
-    color: white;
+  border: 1px solid var(--border);
+
+  .changePeriodbtn {
+    width: 100px;
+    text-align: center;
+    line-height: 24px;
+    border: 1px solid var(--border);
+    background-color: rgba(79, 70, 229, 0.1);
+    color: var(--text-secondary);
+    margin: 0 10px;
+    border-radius: 12px;
+    transition: 0.5s;
+    &:hover {
+      cursor: pointer;
+      background-color: var(--primary);
+      color: var(--bg-secondary);
+      transition: 0.5s;
+    }
   }
 }
-
-p-chart {
-  // PrimeNG автоматически подхватит CSS переменные
+.grafic {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: space-around;
+  .tempChartData {
+    width: 50%;
+    height: 400px;
+    background-color: rgba(79, 70, 229, 0.1);
+    margin: 24px auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .humidityChartData {
+    padding: 5px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 50%;
+    height: 400px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: rgba(79, 70, 229, 0.1);
+    .humidityH3 {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
 }

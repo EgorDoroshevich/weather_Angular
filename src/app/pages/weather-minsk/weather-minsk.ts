@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { WeatherMinskService } from '../../data/services/weather-minsk';
@@ -12,16 +12,33 @@ type Period = 'day' | 'week' | 'month';
   templateUrl: './weather-minsk.html',
   styleUrl: './weather-minsk.scss',
 })
-export class WeatherMinsk implements OnInit {
+export class WeatherMinsk implements OnInit, OnDestroy {
   selectedPeriod: Period = 'day';
   tempChartData: any | null = null;
   humidityChartData: any | null = null;
+
+  private intervalId: any;
 
   constructor(private minskWeatherService: WeatherMinskService) {}
 
   ngOnInit() {
     this.changePeriod('day');
     this.loadHumidityWeek();
+    this.startAutoUpdate();
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    setTimeout(() => {
+      this.changePeriod(this.selectedPeriod);
+      this.loadHumidityWeek();
+    }, 300);
   }
 
   changePeriod(period: Period) {
@@ -101,5 +118,12 @@ export class WeatherMinsk implements OnInit {
         ],
       };
     });
+  }
+  private startAutoUpdate() {
+    this.intervalId = setInterval(() => {
+      console.log('🔄 Обновление Минск погоды...');
+      this.changePeriod(this.selectedPeriod);
+      this.loadHumidityWeek();
+    }, 15 * 60 * 1000);
   }
 }
