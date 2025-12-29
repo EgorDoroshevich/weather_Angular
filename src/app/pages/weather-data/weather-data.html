@@ -1,18 +1,19 @@
 <div class="conrainer">
-  <div class="table">
+  <div class="conrainer__item">
+    <h3>Таблица температур стран СНГ</h3>
     <nz-table #basicTable [nzData]="data" [nzBordered]="true" [nzLoading]="loading">
-      <thead class="table__item">
-        <tr class="table__item__elem">
-          <th class="item__part">Страна</th>
-          <th class="item__part">Город</th>
-          <th class="item__part">Температура, °C</th>
+      <thead>
+        <tr>
+          <th>Страна</th>
+          <th>Город</th>
+          <th>Температура, °C</th>
         </tr>
       </thead>
-      <tbody class="table__item">
-        <tr class="table__item__elem" *ngFor="let row of basicTable.data">
-          <td class="item__part">{{ row.country }}</td>
-          <td class="item__part">{{ row.city }}</td>
-          <td class="item__part">{{ row.temperature }}</td>
+      <tbody>
+        <tr *ngFor="let row of basicTable.data">
+          <td>{{ row.country }}</td>
+          <td>{{ row.city }}</td>
+          <td>{{ row.temperature }}</td>
         </tr>
       </tbody>
     </nz-table>

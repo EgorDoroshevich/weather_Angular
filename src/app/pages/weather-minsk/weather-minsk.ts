@@ -121,9 +121,9 @@ export class WeatherMinsk implements OnInit, OnDestroy {
   }
   private startAutoUpdate() {
     this.intervalId = setInterval(() => {
-      console.log('🔄 Обновление Минск погоды...');
+      console.log('Обновление Минск погоды');
       this.changePeriod(this.selectedPeriod);
       this.loadHumidityWeek();
-    }, 15 * 60 * 1000);
+    }, 2 * 60 * 60 * 1000);
   }
 }

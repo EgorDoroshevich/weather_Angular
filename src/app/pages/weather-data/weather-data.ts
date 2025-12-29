@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { forkJoin } from 'rxjs';
 import { WeatherService } from '../../data/services/weather';
@@ -45,6 +45,7 @@ export class WeatherDataComponent implements OnInit, OnDestroy {
   }
 
   loadTemperatures() {
+    if (this.loading) return;
     this.loading = true;
 
     const requests = this.data.map((row) =>
@@ -72,7 +73,7 @@ export class WeatherDataComponent implements OnInit, OnDestroy {
     this.intervalId = setInterval(() => {
       console.log('🔄 Автообновление погоды...');
       this.loadTemperatures();
-    }, 15 * 60 * 1000); 
+    }, 60 * 60 * 1000);
   }
 
   private buildWindPie() {
