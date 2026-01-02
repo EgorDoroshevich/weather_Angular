@@ -38,7 +38,7 @@ export class WeatherMinsk implements OnInit, OnDestroy {
     setTimeout(() => {
       this.changePeriod(this.selectedPeriod);
       this.loadHumidityWeek();
-    }, 300);
+    }, 60 * 60 * 3000);
   }
 
   changePeriod(period: Period) {

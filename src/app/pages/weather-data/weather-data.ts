@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { forkJoin } from 'rxjs';
 import { WeatherService } from '../../data/services/weather';
@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { WeatherData } from '../../data/interfaces/weather_data.interface';
 import { WeatherMinsk } from '../weather-minsk/weather-minsk';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-weather-data',
   standalone: true,
-  imports: [NzTableModule, CommonModule, ChartModule, WeatherMinsk],
+  imports: [NzTableModule, CommonModule, ChartModule, WeatherMinsk, RouterLink, RouterLinkActive],
   templateUrl: './weather-data.html',
   styleUrl: './weather-data.scss',
 })

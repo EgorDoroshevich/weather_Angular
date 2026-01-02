@@ -1,4 +1,8 @@
 <div class="conrainer">
+  <nav class="nav__bar">
+    <button class="notes__btn" nz-button routerLink="/notes" routerLinkActive="active">Заметки</button>
+  </nav>
+
   <div class="conrainer__item">
     <h3>Таблица температур стран СНГ</h3>
     <nz-table #basicTable [nzData]="data" [nzBordered]="true" [nzLoading]="loading">
@@ -22,8 +26,7 @@
   <div class="statistics">
     <div class="diagrams">
       <h3 class="diagrams__item__h3">Круговая диаграмма скорости ветра стран СНГ</h3>
-      <p-chart class="diagrams__item" *ngIf="windChartData" type="pie" [data]="windChartData">
-      </p-chart>
+      <p-chart *ngIf="windChartData" type="pie" [data]="windChartData"> </p-chart>
     </div>
     <div class="grafic">
       <app-weather-minsk></app-weather-minsk>

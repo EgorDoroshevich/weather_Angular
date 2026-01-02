@@ -3,11 +3,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AsideCard } from '../../../data/interfaces/aside.interface';
 import { LocalStorage } from '../../../data/services/local-storage';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-aside-notes',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './aside-notes.html',
   styleUrl: './aside-notes.scss',
 })

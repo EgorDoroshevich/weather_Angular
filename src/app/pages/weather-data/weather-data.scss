@@ -6,20 +6,95 @@
       width: 100%;
       min-height: 100vh;
       position: relative;
-
+      .notes__btn {
+        width: 200px;
+        line-height: 24px;
+        font-size: 16px;
+        font-family: serif;
+        text-align: center;
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid var(--border);
+        background-color: rgba(79, 70, 229, 0.1);
+        color: var(--text-secondary);
+        border-radius: 12px;
+        transition: 0.5s;
+        &:hover {
+          background-color: var(--primary);
+          color: var(--bg-secondary);
+          transition: 0.5s;
+          cursor: pointer;
+        }
+      }
       .statistics {
         position: relative;
         z-index: 1;
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+        margin: 20px 24px;
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(20px);
         border-radius: 24px;
         padding: 32px;
         margin: 24px;
         box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        @media (max-width: 1024px) {
+          flex-direction: column;
+        }
+
+        @media (max-width: 768px) {
+          margin: 16px;
+          gap: 16px;
+        }
+
+        .diagrams {
+          ::ng-deep {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 16px;
+            padding: 24px;
+            background: rgba(79, 70, 229, 0.08);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+
+            &__item__h3 {
+              color: var(--text-secondary);
+              margin: 0 0 16px 0;
+              font-size: 18px;
+              font-weight: 600;
+            }
+
+            p-chart {
+              width: 100%;
+              height: 400px;
+
+              @media (max-width: 768px) {
+                height: 300px;
+              }
+            }
+          }
+        }
+        // .grafic {
+        //   flex: 1;
+        //   display: flex;
+        //   padding: 24px;
+        //   background: rgba(79, 70, 229, 0.08);
+        //   border-radius: 16px;
+        //   border: 1px solid var(--border);
+
+        //   app-weather-minsk {
+        //     width: 100%;
+        //     height: 850px;
+        //   }
+
+        //   @media (max-width: 768px) {
+        //     height: 350px;
+        //   }
+        // }
       }
 
       .conrainer__item {
-        width: 250px;
         position: relative;
         z-index: 1;
         border: 1px solid transparent;
@@ -43,10 +118,16 @@
           @media (max-width: 550px) {
             font-size: 14px;
             font-weight: 600;
+            color: #000;
           }
           @media (max-width: 475px) {
             font-size: 12px;
             font-weight: 600;
+            color: #000;
+          }
+          @media (max-width: 350px) {
+            font-size: 10px;
+            font-weight: 500;
             color: #000;
           }
         }
@@ -56,19 +137,10 @@
           border: 1px solid var(--border);
           border-radius: 16px;
           .ant-table {
-            width: 100%;
+            // width: 100%;
             background: rgba(255, 255, 255, 0.08);
-            @media (max-width: 550px) {
-              border: 1px solid #000;
-              width: 200px;
-              background-color: rgba(79, 70, 229, 0.08);
-              border: 1px solid var(--border);
-              border-radius: 16px;
-            }
             .ant-table-cell {
               padding: 2px;
-              width: 40px;
-              flex-wrap: wrap;
               color: var(--text-secondary);
               background: rgba(255, 255, 255, 0.08);
               // border: 1px solid var(--border);
@@ -85,70 +157,17 @@
                 color: #000;
                 padding: 2px;
               }
+              @media (max-width: 350px) {
+                font-size: 8px;
+                font-weight: 200;
+                color: #000;
+                padding: 2px;
+              }
             }
           }
         }
       }
 
-      .statistics {
-        display: flex;
-        flex-direction: row;
-        gap: 24px;
-        margin: 20px 24px;
-
-        @media (max-width: 1024px) {
-          flex-direction: column;
-        }
-
-        @media (max-width: 768px) {
-          margin: 16px;
-          gap: 16px;
-        }
-      }
-      .diagrams {
-        display: grid;
-        grid-template-rows: auto 1fr;
-        gap: 16px;
-        padding: 24px;
-
-        max-width: 500px;
-        background: rgba(79, 70, 229, 0.08);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-
-        &__item__h3 {
-          color: var(--text-secondary);
-          margin: 0 0 16px 0;
-          font-size: 18px;
-          font-weight: 600;
-        }
-
-        &__item {
-          width: 100%;
-          height: 400px;
-
-          @media (max-width: 768px) {
-            height: 300px;
-          }
-        }
-      }
-      .grafic {
-        flex: 1;
-        display: flex;
-        padding: 24px;
-        background: rgba(79, 70, 229, 0.08);
-        border-radius: 16px;
-        border: 1px solid var(--border);
-
-        app-weather-minsk {
-          width: 100%;
-          height: 850px;
-        }
-
-        @media (max-width: 768px) {
-          height: 350px;
-        }
-      }
       .ant-pagination {
         display: none;
       }

@@ -1,4 +1,9 @@
 <div class="aside">
+  <nav class="nav__bar">
+    <button class="weather__btn" nz-button routerLink="/weather" routerLinkActive="active">
+      Погода
+    </button>
+  </nav>
   <div class="aside__container">
     <div class="input__container">
       <div class="input__container__item">
@@ -11,13 +16,15 @@
 
     <div class="notes__container">
       <div class="note" *ngFor="let note of notes; trackBy: trackById">
-        <div>
+        <div class="note__item">
           <p class="text__item">{{ note.text }}</p>
+        </div>
+        <div class="note__subscrube">
           <p class="date__item">
             {{ note.date | date : 'dd.MM.yy, HH:mm:ss' }}
           </p>
+          <button class="delete__item" (click)="removeNote(note.id)">Удалить</button>
         </div>
-        <button class="delete__item" (click)="removeNote(note.id)">delete</button>
       </div>
     </div>
     <div class="time__container"></div>
