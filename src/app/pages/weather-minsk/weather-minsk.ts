@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { WeatherMinskService } from '../../data/services/weather-minsk';
@@ -12,33 +12,16 @@ type Period = 'day' | 'week' | 'month';
   templateUrl: './weather-minsk.html',
   styleUrl: './weather-minsk.scss',
 })
-export class WeatherMinsk implements OnInit, OnDestroy {
+export class WeatherMinsk implements OnInit {
   selectedPeriod: Period = 'day';
   tempChartData: any | null = null;
   humidityChartData: any | null = null;
-
-  private intervalId: any;
 
   constructor(private minskWeatherService: WeatherMinskService) {}
 
   ngOnInit() {
     this.changePeriod('day');
     this.loadHumidityWeek();
-    this.startAutoUpdate();
-  }
-
-  ngOnDestroy() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
-  }
-
-  @HostListener('window:resize')
-  onResize() {
-    setTimeout(() => {
-      this.changePeriod(this.selectedPeriod);
-      this.loadHumidityWeek();
-    }, 60 * 60 * 3000);
   }
 
   changePeriod(period: Period) {
@@ -59,8 +42,20 @@ export class WeatherMinsk implements OnInit, OnDestroy {
 
     this.minskWeatherService.getMinskTemperature(start, end).subscribe((data) => {
       const d = data as any;
+      let labels = d.hourly.time;
+
+      if (period === 'day') {
+        labels = d.hourly.time.map((t: string) =>
+          new Date(t).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
+        );
+      } else {
+        labels = d.hourly.time.map((t: string) =>
+          new Date(t).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' })
+        );
+      }
+
       this.tempChartData = {
-        labels: d.hourly.time,
+        labels,
         datasets: [
           {
             label: 'Температура, °C',
@@ -118,12 +113,5 @@ export class WeatherMinsk implements OnInit, OnDestroy {
         ],
       };
     });
-  }
-  private startAutoUpdate() {
-    this.intervalId = setInterval(() => {
-      console.log('Обновление Минск погоды');
-      this.changePeriod(this.selectedPeriod);
-      this.loadHumidityWeek();
-    }, 2 * 60 * 60 * 1000);
   }
 }

@@ -72,7 +72,6 @@ export class WeatherDataComponent implements OnInit, OnDestroy {
 
   private startAutoUpdate() {
     this.intervalId = setInterval(() => {
-      console.log('🔄 Автообновление погоды...');
       this.loadTemperatures();
     }, 60 * 60 * 1000);
   }

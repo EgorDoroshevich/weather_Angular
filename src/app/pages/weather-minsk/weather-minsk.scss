@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: space-around;
   padding: 10px 5px;
-  border: 1px solid var(--border);
 
   .changePeriodbtn {
     width: 100px;
@@ -23,31 +22,39 @@
     }
   }
 }
+
 .grafic {
   width: 100%;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  gap: 24px;
   .tempChartData {
-    width: 100%;
-    height: 100%;
+    width: 80%;
     background-color: rgba(79, 70, 229, 0.1);
-    margin: 24px auto;
+    margin-bottom: 20px;
     border: 1px solid var(--border);
     border-radius: 12px;
+    @media (max-width: 1235px) {
+      width: 100%;
+      height: 100%;
+    }
   }
   .humidityChartData {
+    width: 80%;
     padding: 5px;
     margin: 5px;
     border: 1px solid var(--border);
     border-radius: 12px;
-    width: 100%;
-    height: 100%;
     text-align: center;
     font-size: 14px;
     font-weight: 500;
     background-color: rgba(79, 70, 229, 0.1);
+    @media (max-width: 1235px) {
+      width: 100%;
+      height: 100%;
+    }
     .humidityH3 {
       color: var(--text-secondary);
       font-size: 14px;

@@ -28,21 +28,30 @@
     .input__container {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      width: 100%;
 
       .input__container__item {
         width: 100%;
         margin: 0 40px;
+        @media (max-width: 670px) {
+          width: 100%;
+          margin: 0 10px;
+        }
         .input {
           width: 100%;
           border: 1px solid transparent;
           border-radius: 47px;
           padding: 0 10px;
           line-height: 42px;
+          @media (max-width: 670px) {
+            line-height: 32px;
+          }
         }
       }
       .input__container__btn {
-        width: 250px;
         .write__btn {
+          width: 150px;
           line-height: 24px;
           font-size: 16px;
           font-family: serif;
@@ -60,6 +69,11 @@
             transition: 0.5s;
             cursor: pointer;
           }
+          @media (max-width: 500px) {
+            width: 100px;
+            font-size: 12px;
+            line-height: 18px;
+          }
         }
       }
     }
@@ -69,6 +83,10 @@
       width: 100%;
       background-color: transparent;
       position: relative;
+      @media (max-width: 670px) {
+        margin: 10px 0;
+        padding: 10px;
+      }
       .note {
         width: 100%;
         margin: 10px 0;
@@ -77,6 +95,7 @@
         border-radius: 12px;
         display: flex;
         flex-direction: column;
+
         .note__subscrube {
           display: flex;
           flex: 1;
@@ -100,6 +119,11 @@
               transition: 0.5s;
               cursor: pointer;
             }
+            @media (max-width: 500px) {
+              width: 80px;
+              line-height: 18px;
+              font-size: 12px;
+            }
           }
           .date__item {
             padding: 5px;
@@ -111,16 +135,21 @@
             margin: 0px;
           }
         }
-        .note__item {
-          padding: 20px 10px;
+        .date__item {
+          color: var(--text-secondary);
+          font-size: 12px;
+          font-weight: 200;
         }
-
-        .text__item {
-          display: flex;
-          align-items: flex-start;
-          justify-content: left;
-          font-size: 16px;
-          font-weight: 100;
+        .note__item {
+          .text__item {
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: left;
+            font-size: 16px;
+            font-weight: 100;
+          }
         }
       }
     }
