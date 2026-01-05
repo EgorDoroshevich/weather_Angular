@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AsideCard } from '../../../data/interfaces/aside.interface';
 import { LocalStorage } from '../../../data/services/local-storage';
@@ -31,6 +31,7 @@ export class AsideNotes implements OnInit {
     this.saveNotes();
     this.inputText = '';
   }
+
   trackById(index: number, note: AsideCard) {
     return note.id;
   }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { forkJoin } from 'rxjs';
 import { WeatherService } from '../../data/services/weather';
@@ -15,7 +15,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './weather-data.html',
   styleUrl: './weather-data.scss',
 })
-export class WeatherDataComponent implements OnInit, OnDestroy {
+export class WeatherDataComponent implements OnInit {
   data: WeatherData[] = [
     { country: 'Беларусь', city: 'Минск', lat: 53.9, lon: 27.56 },
     { country: 'Россия', city: 'Москва', lat: 55.75, lon: 37.61 },
@@ -26,23 +26,14 @@ export class WeatherDataComponent implements OnInit, OnDestroy {
     { country: 'Кыргызстан', city: 'Бишкек', lat: 42.8746212, lon: 74.5697617 },
     { country: 'Таджикистан', city: 'Душанбе', lat: 38.559772, lon: 68.787038 },
   ];
-
   loading = false;
   windChartData: any | null[] = null;
-
-  private intervalId: any;
 
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit() {
     this.loadTemperatures();
-    this.startAutoUpdate();
-  }
-
-  ngOnDestroy() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
+    WeatherMinsk;
   }
 
   loadTemperatures() {
@@ -68,12 +59,6 @@ export class WeatherDataComponent implements OnInit, OnDestroy {
         this.loading = false;
       },
     });
-  }
-
-  private startAutoUpdate() {
-    this.intervalId = setInterval(() => {
-      this.loadTemperatures();
-    }, 60 * 60 * 1000);
   }
 
   private buildWindPie() {

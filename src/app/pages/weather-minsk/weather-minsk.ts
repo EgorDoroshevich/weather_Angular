@@ -24,7 +24,7 @@ export class WeatherMinsk implements OnInit {
     this.loadHumidityWeek();
   }
 
-  changePeriod(period: Period) {
+  public changePeriod(period: Period) {
     this.selectedPeriod = period;
 
     const now = new Date();
@@ -61,15 +61,13 @@ export class WeatherMinsk implements OnInit {
             label: 'Температура, °C',
             data: d.hourly.temperature_2m,
             borderColor: '#1890ff',
-            fill: false,
-            tension: 0.3,
           },
         ],
       };
     });
   }
 
-  private loadHumidityWeek() {
+  public loadHumidityWeek() {
     const now = new Date();
     const end = now.toISOString().slice(0, 10);
 
@@ -78,9 +76,12 @@ export class WeatherMinsk implements OnInit {
     const start = startDate.toISOString().slice(0, 10);
 
     this.minskWeatherService.getHumidityRange(start, end).subscribe((res) => {
-      const r = res as any;
-      const times: string[] = r.hourly.time;
-      const humidity: number[] = r.hourly.relative_humidity_2m;
+      const time = res as any;
+      const times: string[] = time.hourly.time.map((time: string) =>
+        new Date(time).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' })
+      );
+      console.log(times);
+      const humidity: number[] = time.hourly.relative_humidity_2m;
 
       // группируем по дню и считаем среднее
       const byDay = new Map<string, number[]>();
