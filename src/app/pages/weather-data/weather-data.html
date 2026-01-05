@@ -1,11 +1,16 @@
-<div class="conrainer">
-  <nav class="nav__bar">
-    <button class="notes__btn" nz-button routerLink="/notes" routerLinkActive="active">
-      Заметки
-    </button>
-  </nav>
+<div class="container">
+  <div class="head">
+    <nav class="nav__bar">
+      <button class="notes__btn" nz-button routerLink="/notes" routerLinkActive="active">
+        Заметки
+      </button>
+    </nav>
+    <div class="logo">
+      <img src="img/logo.png" alt="SmartWeather" class="logo__item" />
+    </div>
+  </div>
 
-  <div class="conrainer__item">
+  <div class="container__item">
     <h3>Таблица температур стран СНГ</h3>
     <nz-table #basicTable [nzData]="data" [nzBordered]="true" [nzLoading]="loading">
       <thead>
@@ -30,8 +35,7 @@
       <h3 class="diagrams__item__h3">Круговая диаграмма скорости ветра стран СНГ</h3>
       <p-chart *ngIf="windChartData" type="pie" [data]="windChartData"> </p-chart>
     </div>
-    <!-- <div> -->
+
     <app-weather-minsk></app-weather-minsk>
-    <!-- </div> -->
   </div>
 </div>

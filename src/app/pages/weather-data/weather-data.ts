@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { forkJoin } from 'rxjs';
 import { WeatherService } from '../../data/services/weather';
@@ -33,10 +33,9 @@ export class WeatherDataComponent implements OnInit {
 
   ngOnInit() {
     this.loadTemperatures();
-    WeatherMinsk;
   }
 
-  loadTemperatures() {
+  public loadTemperatures() {
     if (this.loading) return;
     this.loading = true;
 
@@ -52,10 +51,11 @@ export class WeatherDataComponent implements OnInit {
           windSpeed: responses[index].current.wind_speed_10m,
         }));
         this.buildWindPie();
-        console.log(this.data);
+        console.log(this.data); //
         this.loading = false;
       },
-      error: () => {
+      error: (err) => {
+        console.error('API ERROR', err); //
         this.loading = false;
       },
     });

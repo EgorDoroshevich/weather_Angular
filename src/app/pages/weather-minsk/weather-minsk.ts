@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { WeatherMinskService } from '../../data/services/weather-minsk';
@@ -17,7 +17,7 @@ export class WeatherMinsk implements OnInit {
   tempChartData: any | null = null;
   humidityChartData: any | null = null;
 
-  constructor(private minskWeatherService: WeatherMinskService) {}
+  constructor(private minskWeatherService: WeatherMinskService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.changePeriod('day');
@@ -59,11 +59,12 @@ export class WeatherMinsk implements OnInit {
         datasets: [
           {
             label: 'Температура, °C',
-            data: d.hourly.temperature_2m,
+            data: [...d.hourly.temperature_2m],
             borderColor: '#1890ff',
           },
         ],
       };
+      this.cdr.detectChanges();
     });
   }
 
@@ -80,14 +81,11 @@ export class WeatherMinsk implements OnInit {
       const times: string[] = time.hourly.time.map((time: string) =>
         new Date(time).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' })
       );
-      console.log(times);
       const humidity: number[] = time.hourly.relative_humidity_2m;
-
-      // группируем по дню и считаем среднее
       const byDay = new Map<string, number[]>();
 
       times.forEach((t, i) => {
-        const day = t.slice(0, 10); // "YYYY-MM-DD"
+        const day = t.slice(0, 10);
         const value = humidity[i];
         const arr = byDay.get(day) ?? [];
         arr.push(value);
@@ -104,15 +102,16 @@ export class WeatherMinsk implements OnInit {
       });
 
       this.humidityChartData = {
-        labels,
+        labels: [...labels],
         datasets: [
           {
             label: 'Средняя влажность, %',
-            data: values,
+            data: [...values],
             backgroundColor: '#40a9ff',
           },
         ],
       };
+      this.cdr.detectChanges();
     });
   }
 }
