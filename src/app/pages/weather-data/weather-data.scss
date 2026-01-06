@@ -10,6 +10,7 @@
         border: 1px solid transparent;
         border-radius: 12px;
         display: flex;
+        flex-direction: row-reverse;
         justify-content: space-between;
         align-items: center;
         padding: 20px 32px;
@@ -18,8 +19,8 @@
         .logo {
           position: relative;
           z-index: 10;
-          width: 60px;
-          height: 60px;
+          width: 100px;
+          height: 100px;
           display: flex;
           align-items: center;
           justify-content: center;
