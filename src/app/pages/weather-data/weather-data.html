@@ -33,7 +33,8 @@
   <div class="statistics">
     <div class="diagrams">
       <h3 class="diagrams__item__h3">Круговая диаграмма скорости ветра стран СНГ</h3>
-      <p-chart *ngIf="windChartData" type="pie" [data]="windChartData"> </p-chart>
+      <p-chart *ngIf="windChartData" type="pie" [data]="windChartData" [options]="windChartOptions">
+      </p-chart>
     </div>
 
     <app-weather-minsk></app-weather-minsk>

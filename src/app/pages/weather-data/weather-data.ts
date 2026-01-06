@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { forkJoin } from 'rxjs';
 import { WeatherService } from '../../data/services/weather';
@@ -29,7 +29,7 @@ export class WeatherDataComponent implements OnInit {
   loading = false;
   windChartData: any | null[] = null;
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(private weatherService: WeatherService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadTemperatures();
@@ -54,19 +54,19 @@ export class WeatherDataComponent implements OnInit {
         console.log(this.data); //
         this.loading = false;
       },
-      error: (err) => {
-        console.error('API ERROR', err); //
+      error: () => {
         this.loading = false;
       },
     });
+    this.cdr.detectChanges();
   }
 
   private buildWindPie() {
     this.windChartData = {
-      labels: this.data.map((d) => d.country),
+      labels: [...this.data.map((d) => d.country)],
       datasets: [
         {
-          data: this.data.map((d) => d.windSpeed),
+          data: [...this.data.map((d) => d.windSpeed)],
           backgroundColor: [
             '#DC143C',
             '#4169E1',
@@ -78,9 +78,27 @@ export class WeatherDataComponent implements OnInit {
             '#8B5CF6',
           ],
           borderColor: '#ffffff',
-          borderWidth: 0.1,
+          borderWidth: 0.3,
         },
       ],
     };
+    this.cdr.detectChanges();
   }
+  windChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'left',
+        labels: {
+          color: '#333',
+          font: { size: 14 },
+          padding: 20,
+          usePointStyle: true,
+        },
+      },
+    },
+    layout: { margin: { left: 20 } },
+  };
 }
