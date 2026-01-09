@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { WeatherMinskService } from '../../data/services/weather-minsk';
+import { LoadingData } from '../../data/services/loading';
 
 type Period = 'day' | 'week' | 'month';
 
@@ -17,7 +18,11 @@ export class WeatherMinsk implements OnInit {
   tempChartData: any | null = null;
   humidityChartData: any | null = null;
 
-  constructor(private minskWeatherService: WeatherMinskService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private minskWeatherService: WeatherMinskService,
+    private cdr: ChangeDetectorRef,
+    public loadingService: LoadingData
+  ) {}
 
   ngOnInit() {
     this.changePeriod('day');

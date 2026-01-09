@@ -7,6 +7,7 @@ import { ChartModule } from 'primeng/chart';
 import { WeatherData } from '../../data/interfaces/weather_data.interface';
 import { WeatherMinsk } from '../weather-minsk/weather-minsk';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { LoadingData } from '../../data/services/loading';
 
 @Component({
   selector: 'app-weather-data',
@@ -26,19 +27,20 @@ export class WeatherDataComponent implements OnInit {
     { country: 'Кыргызстан', city: 'Бишкек', lat: 42.8746212, lon: 74.5697617 },
     { country: 'Таджикистан', city: 'Душанбе', lat: 38.559772, lon: 68.787038 },
   ];
-  loading = false;
   windChartData: any | null[] = null;
 
-  constructor(private weatherService: WeatherService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    public weatherService: WeatherService,
+    private cdr: ChangeDetectorRef,
+    public loadingService: LoadingData
+  ) {}
 
   ngOnInit() {
     this.loadTemperatures();
   }
 
   public loadTemperatures() {
-    if (this.loading) return;
-    this.loading = true;
-
+    this.loadingService.show();
     const requests = this.data.map((row) =>
       this.weatherService.getCurrentTemperature(row.lat, row.lon)
     );
@@ -51,13 +53,13 @@ export class WeatherDataComponent implements OnInit {
           windSpeed: responses[index].current.wind_speed_10m,
         }));
         this.buildWindPie();
-        console.log(this.data); //
-        this.loading = false;
+        this.loadingService.hide();
       },
       error: () => {
-        this.loading = false;
+        this.loadingService.hide();
       },
     });
+
     this.cdr.detectChanges();
   }
 

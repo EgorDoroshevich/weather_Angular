@@ -12,7 +12,12 @@
 
   <div class="container__item">
     <h3>Таблица температур стран СНГ</h3>
-    <nz-table #basicTable [nzData]="data" [nzBordered]="true" [nzLoading]="loading">
+    <nz-table
+      #basicTable
+      [nzData]="data"
+      [nzBordered]="true"
+      [nzLoading]="loadingService.isLoading()"
+    >
       <thead>
         <tr>
           <th>Страна</th>

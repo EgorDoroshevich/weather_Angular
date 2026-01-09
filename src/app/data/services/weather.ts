@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-//для таблицы и ветра использую WeatherService
+
 export class WeatherService {
   private readonly baseUrl = 'https://api.open-meteo.com/v1/forecast';
-
   http = inject(HttpClient);
 
   getCurrentTemperature(lat: number, lon: number): Observable<any> {
