@@ -5,6 +5,8 @@
       flex-direction: column;
       min-height: 100vh;
       position: relative;
+      z-index: 1;
+
       .head {
         margin: 10px 25px;
         border: 1px solid transparent;
@@ -15,10 +17,17 @@
         align-items: center;
         padding: 20px 32px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        @media (max-width: 425px) {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 5px;
+          margin: 5px;
+        }
         @media (max-width: 375px) {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: space-between;
         }
 
         .logo {
@@ -41,9 +50,6 @@
             width: 50px;
             height: 50px;
           }
-          @media (max-width: 375px) {
-            display: none;
-          }
           .logo__item {
             width: 100%;
             height: 100%;
@@ -54,7 +60,7 @@
       }
       .notes__btn {
         width: 200px;
-        line-height: 24px;
+        line-height: 36px;
         font-size: 16px;
         font-family: serif;
         text-align: center;
@@ -65,6 +71,23 @@
         color: var(--text-secondary);
         border-radius: 12px;
         transition: 0.5s;
+        @media (max-width: 1024px) {
+          width: 200px;
+          font-size: 16px;
+          line-height: 24px;
+        }
+        @media (max-width: 425px) {
+          width: 100px;
+          font-size: 12px;
+          line-height: 16px;
+          margin: 0;
+        }
+        @media (max-width: 330px) {
+          width: 100px;
+          font-size: 12px;
+          line-height: 16px;
+          margin: 0;
+        }
         &:hover {
           background-color: var(--primary);
           color: var(--bg-secondary);
@@ -77,8 +100,7 @@
         display: flex;
         justify-content: space-between;
         margin: 20px 25px;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
+        background: transparent;
         border-radius: 24px;
         padding: 32px;
         box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
@@ -91,6 +113,10 @@
         @media (max-width: 768px) {
           margin: 16px;
           gap: 16px;
+        }
+        @media (max-width: 425px) {
+          margin: 5px;
+          padding: 10px;
         }
         .diagrams {
           width: 1000px;
@@ -107,6 +133,10 @@
             margin: 20px;
             width: 100%;
             height: 100%;
+          }
+          @media (max-width: 425px) {
+            padding: 5px;
+            margin: 0 5px;
           }
           ::ng-deep {
             .p-chart {
@@ -156,6 +186,11 @@
         padding: 32px;
         margin: 24px;
         box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        @media (max-width: 425px) {
+          padding: 10px 5px;
+          margin: 5px;
+          box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+        }
         h3 {
           padding: 10px;
           border: 1px solid var(--border);
