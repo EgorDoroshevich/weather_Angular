@@ -38,7 +38,7 @@ export class WeatherMinsk implements OnInit {
 
     const startDate = new Date(now);
     if (period === 'day') {
-      startDate.setDate(now.getDate() - 1);
+      startDate.setDate(now.getDate());
     } else if (period === 'week') {
       startDate.setDate(now.getDate() - 7);
     } else {
@@ -86,9 +86,9 @@ export class WeatherMinsk implements OnInit {
       const humidity = res.hourly.relative_humidity_2m;
       const byDay = new Map<string, number[]>();
 
-      times.forEach((t, i) => {
-        const day = t.slice(0, 10);
-        const value = humidity[i];
+      times.forEach((time, id) => {
+        const day = time.slice(0, 10);
+        const value = humidity[id];
         const arr = byDay.get(day) ?? [];
         arr.push(value);
         byDay.set(day, arr);
