@@ -15,7 +15,8 @@
     </div>
 
     <div class="notes__container">
-      <div class="note" *ngFor="let note of notes; trackBy: trackById">
+      @for (note of notes; track note.id) {
+      <div class="note">
         <div class="note__item">
           <p class="text__item">{{ note.text }}</p>
         </div>
@@ -26,6 +27,7 @@
           <button class="delete__item" (click)="removeNote(note.id)">Удалить</button>
         </div>
       </div>
+      }
     </div>
   </div>
 </div>

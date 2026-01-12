@@ -6,11 +6,11 @@
       <button nz-button class="changePeriodbtn" (click)="changePeriod('month')">Месяц</button>
     </div>
     <div class="chart">
-      <p-chart *ngIf="tempChartData" type="line" [data]="tempChartData"></p-chart>
+      <p-chart type="line" [data]="tempChartData"></p-chart>
     </div>
   </div>
   <div class="humidityChartData">
     <h3 class="humidityH3">Диограмма влажности за неделю по городу Минску</h3>
-    <p-chart *ngIf="humidityChartData" type="bar" [data]="humidityChartData"></p-chart>
+    <p-chart type="bar" [data]="humidityChartData"></p-chart>
   </div>
 </div>

@@ -26,11 +26,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let row of basicTable.data">
+        @for (row of basicTable.data; track row.city){
+        <tr>
           <td>{{ row.country }}</td>
           <td>{{ row.city }}</td>
           <td>{{ row.temperature | number : '1.0-0' }}</td>
         </tr>
+        }
       </tbody>
     </nz-table>
   </div>
@@ -38,10 +40,8 @@
   <div class="statistics">
     <div class="diagrams">
       <h3 class="diagrams__item__h3">Круговая диаграмма скорости ветра стран СНГ</h3>
-      <p-chart *ngIf="windChartData" type="pie" [data]="windChartData" [options]="windChartOptions">
-      </p-chart>
+      <p-chart type="pie" [data]="windChartData" [options]="windChartOptions"> </p-chart>
     </div>
-
     <app-weather-minsk></app-weather-minsk>
   </div>
 </div>

@@ -7,7 +7,7 @@ import { ChartModule } from 'primeng/chart';
 import { WeatherMinsk } from '../weather-minsk/weather-minsk';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LoadingData } from '../../data/services/loading';
-import { WeatherData } from '../../data/interfaces/interface';
+import { CurrentTemperature, WeatherData } from '../../data/interfaces/interface';
 
 @Component({
   selector: 'app-weather-data',
@@ -47,10 +47,10 @@ export class WeatherDataComponent implements OnInit {
 
     forkJoin(requests).subscribe({
       next: (responses) => {
-        this.data = this.data.map((row, index) => ({
+        this.data = this.data.map((row, id) => ({
           ...row,
-          temperature: responses[index].current.temperature_2m,
-          windSpeed: responses[index].current.wind_speed_10m,
+          temperature: responses[id].current.temperature_2m,
+          windSpeed: responses[id].current.wind_speed_10m,
         }));
         this.buildWindPie();
         this.loadingService.hide();

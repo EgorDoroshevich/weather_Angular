@@ -6,7 +6,7 @@ export interface CurrentTemperature {
 export interface MinskTemperature {
   latitude: number;
   longitude: number;
-  hourly: string;
+  hourly: { time: string[]; temperature_2m: string };
   start_date: string;
   end_data: string;
   timezone?: string;
@@ -14,7 +14,7 @@ export interface MinskTemperature {
 export interface HumidityRange {
   latitude: number;
   longitude: number;
-  hourly: string;
+  hourly: { time: string[]; relative_humidity_2m: number[] };
   start_date: string;
   end_data: string;
   timezone?: string;

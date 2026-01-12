@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { WeatherMinskService } from '../../data/services/weather-minsk';
 import { LoadingData } from '../../data/services/loading';
+import { HumidityRange, MinskTemperature } from '../../data/interfaces/interface';
 
 type Period = 'day' | 'week' | 'month';
 
@@ -45,26 +46,23 @@ export class WeatherMinsk implements OnInit {
     }
     const start = startDate.toISOString().slice(0, 10);
 
-    this.minskWeatherService.getMinskTemperature(start, end).subscribe((data) => {
-      const d = data as any;
-      let labels = d.hourly.time;
-
+    this.minskWeatherService.getMinskTemperature(start, end).subscribe((data: MinskTemperature) => {
+      let labels = data.hourly.time;
       if (period === 'day') {
-        labels = d.hourly.time.map((t: string) =>
+        labels = data.hourly.time.map((t: string) =>
           new Date(t).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
         );
       } else {
-        labels = d.hourly.time.map((t: string) =>
+        labels = data.hourly.time.map((t: string) =>
           new Date(t).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' })
         );
       }
-
       this.tempChartData = {
         labels,
         datasets: [
           {
             label: 'Температура, °C',
-            data: [...d.hourly.temperature_2m],
+            data: [...data.hourly.temperature_2m],
             borderColor: '#1890ff',
           },
         ],
@@ -81,12 +79,11 @@ export class WeatherMinsk implements OnInit {
     startDate.setDate(now.getDate() - 7);
     const start = startDate.toISOString().slice(0, 10);
 
-    this.minskWeatherService.getHumidityRange(start, end).subscribe((res) => {
-      const time = res as any;
-      const times: string[] = time.hourly.time.map((time: string) =>
+    this.minskWeatherService.getHumidityRange(start, end).subscribe((res: HumidityRange) => {
+      const times = res.hourly.time.map((time: string) =>
         new Date(time).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' })
       );
-      const humidity: number[] = time.hourly.relative_humidity_2m;
+      const humidity = res.hourly.relative_humidity_2m;
       const byDay = new Map<string, number[]>();
 
       times.forEach((t, i) => {

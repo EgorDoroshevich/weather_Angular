@@ -21,21 +21,19 @@ export class AsideNotes implements OnInit {
   ngOnInit(): void {
     this.loadNotes();
   }
+
   addNote() {
-    const newNotes: AsideCard = {
+    const Card: AsideCard = {
       id: Date.now(),
       text: this.inputText,
       date: new Date(),
     };
     if (!this.inputText.trim()) return;
-    this.notes.push(newNotes);
+    this.notes.push(Card);
     this.saveNotes();
     this.inputText = '';
   }
 
-  trackById(index: number, note: AsideCard) {
-    return note.id;
-  }
   removeNote(id: number): void {
     this.notes = this.notes.filter((note) => note.id !== id);
     this.saveNotes();
