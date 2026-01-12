@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AsideCard } from '../../../data/interfaces/aside.interface';
+
 import { LocalStorage } from '../../../data/services/local-storage';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AsideCard } from '../../../data/interfaces/interface';
 
 @Component({
   selector: 'app-aside-notes',

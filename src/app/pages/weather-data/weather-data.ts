@@ -4,10 +4,10 @@ import { forkJoin } from 'rxjs';
 import { WeatherService } from '../../data/services/weather';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
-import { WeatherData } from '../../data/interfaces/weather_data.interface';
 import { WeatherMinsk } from '../weather-minsk/weather-minsk';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LoadingData } from '../../data/services/loading';
+import { WeatherData } from '../../data/interfaces/interface';
 
 @Component({
   selector: 'app-weather-data',

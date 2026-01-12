@@ -29,7 +29,7 @@
         <tr *ngFor="let row of basicTable.data">
           <td>{{ row.country }}</td>
           <td>{{ row.city }}</td>
-          <td>{{ row.temperature }}</td>
+          <td>{{ row.temperature | number : '1.0-0' }}</td>
         </tr>
       </tbody>
     </nz-table>
