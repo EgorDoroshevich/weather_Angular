@@ -1,9 +1,12 @@
 import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { LocalStorage } from '../../data/services/local-storage';
@@ -19,7 +22,6 @@ import { CommonModule } from '@angular/common';
 })
 export class SignUp {
   localStorageService = inject(LocalStorage);
-  fb = inject(FormBuilder);
 
   user: User[] = [];
 
@@ -35,8 +37,21 @@ export class SignUp {
       Validators.required,
       Validators.minLength(6),
       Validators.maxLength(8),
+      this.passwordMatchValidator(),
     ]),
   });
+
+  passwordMatchValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const formGroup = control.parent;
+      if (!formGroup) return null;
+
+      const password = formGroup.get('password')?.value;
+      const confirmPassword = control.value;
+
+      return password === confirmPassword ? null : { passwordMismatch: true };
+    };
+  }
 
   onSubmit() {
     if (this.formGroup.valid) {

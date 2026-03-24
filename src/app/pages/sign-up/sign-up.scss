@@ -83,20 +83,12 @@
               transition: 0.5s;
               cursor: pointer;
             }
-          }
-          .disabled {
-            width: 100%;
-            pointer-events: none;
-            cursor: none;
-            font-size: 16px;
-            font-family: serif;
-            text-align: center;
-            padding: 5px;
-            border: 1px solid var(--border);
-            background-color: rgba(79, 70, 229, 0.1);
-            color: rgba(79, 70, 229, 0.3);
-            border-radius: 12px;
-            transition: 0.5s;
+            &:disabled:hover {
+              transform: none;
+              cursor: not-allowed;
+              background-color: rgba(79, 70, 229, 0.1);
+              color: var(--text-secondary);
+            }
           }
         }
       }

@@ -1,12 +1,29 @@
 <div class="container">
   <div class="head">
-    <nav class="nav__bar">
-      <button class="notes__btn" nz-button routerLink="/notes" routerLinkActive="active">
-        Заметки
+    <div class="logout">
+      <button
+        class="logout_btn"
+        routerLink="/sign-in"
+        routerLinkActive="active"
+        (click)="removeUser()"
+      >
+        Выйти
       </button>
-    </nav>
-    <div class="logo">
-      <img src="img/LOGO.PNG" alt="SmartWeather" class="logo__item" />
+    </div>
+    <div class="head_item">
+      <div class="head__item__name">
+        <div class="username">{{ getUser() }}</div>
+        <div>
+          <nav class="nav__bar">
+            <button class="notes__btn" nz-button routerLink="/notes" routerLinkActive="active">
+              Заметки
+            </button>
+          </nav>
+        </div>
+      </div>
+      <div class="logo">
+        <img src="img/LOGO.PNG" alt="SmartWeather" class="logo__item" />
+      </div>
     </div>
   </div>
 
@@ -26,12 +43,12 @@
         </tr>
       </thead>
       <tbody>
-        @for (row of basicTable.data; track row.city){
-        <tr>
-          <td>{{ row.country }}</td>
-          <td>{{ row.city }}</td>
-          <td>{{ row.temperature | number : '1.0-0' }}</td>
-        </tr>
+        @for (row of basicTable.data; track row.city) {
+          <tr>
+            <td>{{ row.country }}</td>
+            <td>{{ row.city }}</td>
+            <td>{{ row.temperature | number: '1.0-0' }}</td>
+          </tr>
         }
       </tbody>
     </nz-table>
@@ -39,7 +56,7 @@
 
   <div class="statistics">
     <div class="diagrams">
-      <h3 class="diagrams__item__h3">Круговая диаграмма скорости ветра стран США</h3>
+      <h3 class="diagrams__item__h3">Круговая диаграмма скорости ветра стран СНГ</h3>
       <p-chart type="pie" [data]="windChartData" [options]="windChartOptions"> </p-chart>
     </div>
     <app-weather-minsk></app-weather-minsk>

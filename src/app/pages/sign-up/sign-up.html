@@ -56,9 +56,7 @@
                 <p class="error-maxlength">Максимальная длина символов 8</p>
               } @else if (formGroup.get('confirmpassword')?.errors?.['minlength']) {
                 <p class="error-maxlength">Минимальная длина символов 6</p>
-              } @else if (
-                formGroup.get('confirmpassword')?.value !== formGroup.get('password')?.value
-              ) {
+              } @else {
                 <p class="error-required">Пароли не совпадают</p>
               }
             </div>
@@ -66,8 +64,10 @@
         </div>
         <div>
           <button
-            [disabled]="!formGroup.valid"
+            [disabled]="formGroup.invalid"
             type="submit"
+            (click)="onSubmit()"
+            [class.btn-disabled]="formGroup.invalid"
             class="btn__signup"
             routerLink="/success"
             routerLinkActive="active"

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { forkJoin } from 'rxjs';
 import { WeatherService } from '../../data/services/weather';
@@ -8,6 +8,7 @@ import { WeatherMinsk } from '../weather-minsk/weather-minsk';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LoadingData } from '../../data/services/loading';
 import { CurrentTemperature, WeatherData } from '../../data/interfaces/interface';
+import { LocalStorage } from '../../data/services/local-storage';
 
 @Component({
   selector: 'app-weather-data',
@@ -29,16 +30,23 @@ export class WeatherDataComponent implements OnInit {
   ];
   windChartData: any | null[] = null;
 
-  constructor(
-    public weatherService: WeatherService,
-    private cdr: ChangeDetectorRef,
-    public loadingService: LoadingData,
-  ) {}
+  weatherService = inject(WeatherService);
+  cdr = inject(ChangeDetectorRef);
+  loadingService = inject(LoadingData);
+  localStorage = inject(LocalStorage);
 
   ngOnInit() {
     this.loadTemperatures();
+    this.getUser();
   }
 
+  getUser() {
+    const user = this.localStorage.get('пользователи')[0].value.name;
+    return user;
+  }
+  removeUser() {
+    this.localStorage.remove('пользователи');
+  }
   public loadTemperatures() {
     this.loadingService.show();
     const requests = this.data.map((row) =>

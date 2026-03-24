@@ -12,7 +12,7 @@
         border: 1px solid transparent;
         border-radius: 12px;
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
         padding: 20px 32px;
@@ -29,7 +29,53 @@
           align-items: center;
           justify-content: space-between;
         }
+        .logout {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: end;
+          .logout_btn {
+            background: rgba(79, 70, 229, 0.1);
+            width: 100px;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            line-height: 30px;
+            color: var(--text-secondary);
+            &:hover {
+              background-color: var(--primary);
+              color: var(--bg-secondary);
+              transition: 0.5s;
+              cursor: pointer;
+            }
+          }
+        }
+        .head_item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          flex-direction: row-reverse;
 
+          .head__item__name {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            justify-content: center;
+            .username {
+              width: 150px;
+              border: 1px solid transparent;
+              border-radius: 12px;
+              line-height: 48px;
+              margin-left: 10px;
+              color: var(--text-secondary);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: rgba(79, 70, 229, 0.3);
+              height: 100%;
+            }
+          }
+        }
         .logo {
           position: relative;
           z-index: 10;
