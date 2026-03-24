@@ -1,3 +1,5 @@
+import { AbstractControl } from '@angular/forms';
+
 export interface CurrentTemperature {
   latitude: number;
   longitude: number;
@@ -31,4 +33,15 @@ export interface WeatherData {
   lon: number;
   temperature?: number;
   windSpeed?: number;
+}
+export interface SignUpInterface {
+  name: string | null;
+  login: string | null;
+  password: string | null;
+  confirmpassword: string | null;
+}
+
+export interface User {
+  id: number;
+  value: SignUpInterface;
 }

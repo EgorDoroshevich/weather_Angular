@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="items">
+    <div class="container__item">
+      <h2 class="container__item__h2">Зарегистрируйтесь</h2>
+    </div>
+    <div class="container__item">
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div class="container__items">
+          <div class="container__item__input">
+            <label class="label__input">Введите Ваше имя</label>
+            <input class="input__item" type="text" formControlName="name" />
+            <div *ngIf="formGroup.get('name')?.invalid && formGroup.get('name')?.touched">
+              @if (formGroup.get('name')?.errors?.['required']) {
+                <p class="error-required">Поле не должно быть пустым</p>
+              } @else if (formGroup.get('name')?.errors?.['maxlength']) {
+                <p class="error-maxlength">Максимальная длина символов 60</p>
+              }
+            </div>
+          </div>
+          <div class="container__item__input">
+            <label class="label__input">Введите Ваш логин</label>
+            <input class="input__item" type="text" formControlName="login" />
+            <div *ngIf="formGroup.get('login')?.invalid && formGroup.get('login')?.touched">
+              @if (formGroup.get('login')?.errors?.['required']) {
+                <p class="error-required">Поле не должно быть пустым</p>
+              } @else if (formGroup.get('login')?.errors?.['maxlength']) {
+                <p class="error-maxlength">Максимальная длина символов 60</p>
+              }
+            </div>
+          </div>
+          <div class="container__item__input">
+            <label class="label__input">Придумайте пароль</label>
+            <input class="input__item" type="password" formControlName="password" />
+            <div *ngIf="formGroup.get('password')?.invalid && formGroup.get('password')?.touched">
+              @if (formGroup.get('password')?.errors?.['required']) {
+                <p class="error-required">Поле не должно быть пустым</p>
+              } @else if (formGroup.get('password')?.errors?.['maxlength']) {
+                <p class="error-maxlength">Максимальная длина символов 8</p>
+              } @else if (formGroup.get('password')?.errors?.['minlength']) {
+                <p class="error-maxlength">Минимальная длина символов 6</p>
+              }
+            </div>
+          </div>
+          <div class="container__item__input">
+            <label class="label__input">Повторите пароль</label>
+            <input class="input__item" type="password" formControlName="confirmpassword" />
+            <div
+              *ngIf="
+                formGroup.get('confirmpassword')?.invalid &&
+                formGroup.get('confirmpassword')?.touched
+              "
+            >
+              @if (formGroup.get('confirmpassword')?.errors?.['required']) {
+                <p class="error-required">Поле не должно быть пустым</p>
+              } @else if (formGroup.get('confirmpassword')?.errors?.['maxlength']) {
+                <p class="error-maxlength">Максимальная длина символов 8</p>
+              } @else if (formGroup.get('confirmpassword')?.errors?.['minlength']) {
+                <p class="error-maxlength">Минимальная длина символов 6</p>
+              } @else if (
+                formGroup.get('confirmpassword')?.value !== formGroup.get('password')?.value
+              ) {
+                <p class="error-required">Пароли не совпадают</p>
+              }
+            </div>
+          </div>
+        </div>
+        <div>
+          <button
+            [disabled]="!formGroup.valid"
+            type="submit"
+            class="btn__signup"
+            routerLink="/success"
+            routerLinkActive="active"
+          >
+            Зарегистрироваться
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

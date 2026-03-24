@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="items">
+    <div class="container__item">
+      <h2 class="container__item__h2">Войдите в систему</h2>
+    </div>
+    <div class="container__item">
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div class="container__item__input">
+          <label class="label__input">Введите логин</label>
+          <input class="input__item" type="text" formControlName="login" />
+        </div>
+        <div class="container__item__input">
+          <label class="label__input">Введите пароль</label>
+          <input class="input__item" type="password" formControlName="password" />
+        </div>
+        <button type="submit" class="btn__signup">Войти</button>
+      </form>
+    </div>
+  </div>
+</div>

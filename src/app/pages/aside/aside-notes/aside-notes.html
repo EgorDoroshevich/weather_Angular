@@ -16,17 +16,17 @@
 
     <div class="notes__container">
       @for (note of notes; track note.id) {
-      <div class="note">
-        <div class="note__item">
-          <p class="text__item">{{ note.text }}</p>
+        <div class="note">
+          <div class="note__item">
+            <p class="text__item">{{ note.text }}</p>
+          </div>
+          <div class="note__subscrube">
+            <p class="date__item">
+              {{ note.date | date: 'dd.MM.yy, HH:mm:ss' }}
+            </p>
+            <button class="delete__item" (click)="removeNote(note.id)">Удалить</button>
+          </div>
         </div>
-        <div class="note__subscrube">
-          <p class="date__item">
-            {{ note.date | date : 'dd.MM.yy, HH:mm:ss' }}
-          </p>
-          <button class="delete__item" (click)="removeNote(note.id)">Удалить</button>
-        </div>
-      </div>
       }
     </div>
   </div>

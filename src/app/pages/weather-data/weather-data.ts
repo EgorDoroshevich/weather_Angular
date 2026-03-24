@@ -32,7 +32,7 @@ export class WeatherDataComponent implements OnInit {
   constructor(
     public weatherService: WeatherService,
     private cdr: ChangeDetectorRef,
-    public loadingService: LoadingData
+    public loadingService: LoadingData,
   ) {}
 
   ngOnInit() {
@@ -42,7 +42,7 @@ export class WeatherDataComponent implements OnInit {
   public loadTemperatures() {
     this.loadingService.show();
     const requests = this.data.map((row) =>
-      this.weatherService.getCurrentTemperature(row.lat, row.lon)
+      this.weatherService.getCurrentTemperature(row.lat, row.lon),
     );
 
     forkJoin(requests).subscribe({

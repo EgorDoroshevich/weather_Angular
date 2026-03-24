@@ -1,0 +1,74 @@
+:host {
+  ::ng-deep {
+    .container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      .items {
+        background-color: rgba(79, 70, 229, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border: 1px solid transparent;
+        border-radius: 24px;
+        box-sizing: border-box;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        .container__item {
+          justify-content: center;
+          align-items: center;
+          padding: 15px 10px;
+          .container__item__h2 {
+            color: var(--text-secondary);
+          }
+          .container__item__input {
+            margin: 20px 0;
+            display: flex;
+            align-items: start;
+            justify-content: start;
+            flex-direction: column;
+            .label__input {
+              color: var(--text-secondary);
+              margin-right: 20px;
+              display: flex;
+              justify-content: start;
+              margin-bottom: 4px;
+            }
+            .input__item {
+              padding: 4px 10px;
+              width: 400px;
+              border-radius: 12px;
+              line-height: 24px;
+              border: 1px solid transparent;
+              outline: none;
+              &:focus {
+                border-color: var(--primary);
+              }
+            }
+          }
+          .btn__signup {
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: serif;
+            text-align: center;
+            padding: 5px 15px;
+            border: 1px solid var(--border);
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--text-secondary);
+            border-radius: 12px;
+            transition: 0.5s;
+            &:hover {
+              background-color: var(--primary);
+              color: var(--bg-secondary);
+              transition: 0.5s;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}
