@@ -1,4 +1,4 @@
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 
 export interface CurrentTemperature {
   latitude: number;
@@ -44,4 +44,9 @@ export interface SignUpInterface {
 export interface User {
   id: number;
   value: SignUpInterface;
+}
+
+export interface TokenResponse {
+  access_token: string;
+  refresh_token: string;
 }

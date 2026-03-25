@@ -1,5 +1,13 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { AuthService } from '../../data/services/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,12 +16,22 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
   styleUrl: './sign-in.scss',
 })
 export class SignIn {
+  auth = inject(AuthService);
+  router = inject(Router);
+
   formGroup = new FormGroup({
-    login: new FormControl<string>(''),
-    password: new FormControl<string>(''),
+    username: new FormControl<string>('', Validators.required),
+    password: new FormControl<string>('', Validators.required),
   });
 
-  onSubmit() {
-    console.log(this.formGroup.value);
+  onSubmit(): void {
+    if (this.formGroup.valid) {
+      console.log(this.formGroup.value);
+      //@ts-ignore
+      this.auth.login(this.formGroup.value).subscribe((response) => {
+        this.router.navigate(['weather']);
+        console.log(response);
+      });
+    }
   }
 }
